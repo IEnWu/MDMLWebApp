@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYPROJECT</title>
+<link rel="stylesheet" href="../static/css/style.css">   <!-- link to css -->
+<body>
+    <header>
+        <img src="../static/imgs/MLMD_Logo_No_Background.png" id="logo">
+    </header>
+
+    <div id="icon-container">
+        <img src="../static/imgs/icon.png" id="icon">
+    </header>
+    </div>
+
+    <main>
+        <!--  <section id="MLname">
+            <div class = "text-container">MLMD </div>
+        </section> -->
+       
+
+            <div id="about">
+                <h2>> About MLMD </h2>
+            </div>
+
+            <section id="intro">
+                <h1>Machine Learning Models for Predicting Single-Value Thermodynamic Properties of Chemical Compounds</h1>
+                <p>Single-value thermodynamic properties are properties that are not temperature or pressure dependent such as normal boiling point, compressibility factor, and others. These models were trained on a dataset of 22,968 compounds that was obtained from ThermoDataEngine software from the National Institute of Standards and Technology of the U.S. Department of Commerce.</p>
+                <p>It predicts values of:</p>
+                <ol>                   
+                    <li>Normal boiling point</li>
+                    <li>Enthalpy of Formation (Gaseous state)</li>
+                    <li>Acentric factor</li>
+                    <li>Critical compressibility factor</li>               
+                </ol>
+            </section>
+                        
+            <div id="smile-submission">
+                <h2>> Provide Your SMILE</h2>
+                
+                    <form method="post" action='/upload' enctype="multipart/form-data">
+                    <h6>Example: O=[N+]([O-])C(Br)([N+](=O)[O-])[N+](=O)[O-]</h6>
+
+                    <textarea id="Name" name="smile_name" placeholder = "Put you SMILE Here..."></textarea><br>
+                    <button type="submit" class="submit-button">Submit</button>
+                    </form>
+            </div>
+
+            {% if result %} 
+            <div id="result">
+            
+                <h2>> Result</h2>
+                {% if result.error %}
+                    <p>{{ result.error }}</p>
+                {% else %}
+                    <p>SMILE: {{ result['SMILE'] }}</p>
+                    <p><img src="{{ result['Structure'] }}"></p>
+                    <p>Normal Boiling Point: {% if result['Normal boiling point'] %}{{ '%.2f' | format(result['Normal boiling point']) }} K{% else %}N/A{% endif %}</p>
+                    <p>Enthalpy of Formation (Gaseous state): {% if result['Enthalpy of Formation (Gaseous state)'] %}{{ '%.2f' | format(result['Enthalpy of Formation (Gaseous state)']) }} kJ/mole{% else %}N/A{% endif %}</p>
+                    <p>Acentric Factor: {% if result['Acentric factor'] %}{{ '%.4f' | format(result['Acentric factor']) }}{% else %}N/A{% endif %}</p>
+                    <p>Critical Compressibility Factor: {% if result['Critical compressibility factor'] %}{{ '%.4f' | format(result['Critical compressibility factor']) }}{% else %}N/A{% endif %}</p>                                 
+                {% endif %}
+            {% endif %}
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p> &copy; 2024 SIT Senior Research Team Project  </p>
+        <p> dbaizhig@stevens.edu </p>
+        <p> jpark26@stevens.edu </p>
+        <p> lacocell@stevens.edu </p>
+    </footer>
+</body>
+</html>
+
+
+
