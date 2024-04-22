@@ -99,17 +99,9 @@ def upload_file():
                 "Acentric factor": predictions[2],
                 "Critical compressibility factor": predictions[3]
             }
-            pass
-        except Exception as specific_error:
-        # 处理特定错误，允许应用继续运行
-            app.logger.error(f'Error occurred: {specific_error}')
-        # 可以返回一个默认值或错误信息
-            return jsonify({'warning': 'A non-critical error occurred, default values returned.'}), 200
-    
         except Exception as e:
-            
-            app.logger.error('An unexpected error occurred', exc_info=True)
-            return jsonify({'error': 'An unexpected error occurred'}), 500
+            print(f"An error occurred: {e}")
+            result = {"error": "An error occurred while processing your SMILE string."}
 
     return render_template('index.html', result=result)
 
@@ -117,10 +109,3 @@ def upload_file():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-import logging
-from logging.handlers import RotatingFileHandler
-
-handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=3)
-handler.setLevel(logging.INFO)
-app.logger.addHandler(handler)
