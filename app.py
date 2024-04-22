@@ -80,6 +80,7 @@ def upload_file():
         try:
             X = compute_descriptors(smile)
             X_df = pd.DataFrame([X])
+            X_df = X_df.drop(['AvgIpc', 'SPS'], axis=1)
             X_values = np.array(list(X.values())).reshape(1, -1)
             #print(X)
             if np.isnan(X_values).any():
