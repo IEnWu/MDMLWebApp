@@ -80,16 +80,17 @@ def upload_file():
         try:
             X = compute_descriptors(smile)
             X_df = pd.DataFrame([X])
+            #X_df.to_csv("test.csv", index=False)
             X_values = np.array(list(X.values())).reshape(1, -1)
             #print(X)
             if np.isnan(X_values).any():
                 predictions = [None, None, None, None]
             else:
                 predictions = [
-                    NB_etr_model.predict(X_df)[0],  # Load these models appropriately
-                    G_etr_model.predict(X_df)[0],
-                    AF_etr_model.predict(X_df)[0],
-                    CC_rf_model.predict(X_df)[0]
+                    NB_etr_model.predict(X_df),  # Load these models appropriately
+                    G_etr_model.predict(X_df),
+                    AF_etr_model.predict(X_df),
+                    CC_rf_model.predict(X_df)
                 ]
             result = {
                 "SMILE": smile,
