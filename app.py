@@ -124,7 +124,9 @@ def upload_file():
             X = compute_descriptors(smile)
             #X_df = pd.DataFrame([X])
             X_df = pd.DataFrame([X], columns=expected_features)
-            #X_df.to_csv("test.csv", index=False)
+            
+            X_df.fillna(0, inplace=True)
+            
             X_values = np.array(list(X.values())).reshape(1, -1)
             #print(X)
             #print("当前特征列：", X_df.columns)
