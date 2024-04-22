@@ -122,15 +122,11 @@ def upload_file():
  'fr_tetrazole', 'fr_thiazole' ,'fr_thiocyan' ,'fr_thiophene',
  'fr_unbrch_alkane', 'fr_urea']
             X = compute_descriptors(smile)
-            #X_df = pd.DataFrame([X])
             X_df = pd.DataFrame([X], columns=expected_features)
             
             X_df.fillna(0, inplace=True)
-            
+
             X_values = np.array(list(X.values())).reshape(1, -1)
-            #print(X)
-            #print("当前特征列：", X_df.columns)
-            #print("预期的特征列：", NB_etr_model.feature_names_in_)
 
             if np.isnan(X_values).any():
                 predictions = [None, None, None, None]
