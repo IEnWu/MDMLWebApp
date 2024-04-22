@@ -99,6 +99,8 @@ def upload_file():
                 "Acentric factor": predictions[2],
                 "Critical compressibility factor": predictions[3]
             }
+            pass
+        
         except Exception as e:
             print(f"An error occurred: {e}")
             result = {"error": "An error occurred while processing your SMILE string."}
